@@ -1,0 +1,16 @@
+version: "2"
+services:
+  db-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: sql-server
+    hostname: sql-server
+    networks:
+      - openhack-net
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "sqlPassword1!"
+    ports: 
+      - 1443
+
+networks:
+  openhack-net:
