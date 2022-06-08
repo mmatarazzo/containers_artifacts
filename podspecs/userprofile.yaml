@@ -21,6 +21,33 @@ spec:
         name: userprofile
         ports:
         - containerPort: 80
+          name: profile-web-svc
         env:
-        - name: SQL_SERVER
-          value: sqlservermsd2910.database.windows.net
+            - name: SQL_SERVER
+              valueFrom:
+                 secretKeyRef:
+                    name: sql-connection
+                    key: SQL_SERVER
+            - name: SQL_USER
+              valueFrom:
+                secretKeyRef:
+                    name: sql-connection
+                    key: SQL_USER
+            - name: SQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: sql-connection
+                    key: SQL_PASSWORD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile-service
+spec:
+  selector:
+    app: userprofile
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: profile-web-svc

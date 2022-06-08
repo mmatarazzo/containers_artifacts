@@ -19,7 +19,7 @@ spec:
                 name: poi-api
                 ports:
                 - containerPort: 80
-                  name: http-web-svc
+                  name: poi-web-svc
                 env:
                  - name: SQL_SERVER
                    valueFrom:
@@ -49,4 +49,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: http-web-svc
+      targetPort: poi-web-svc
