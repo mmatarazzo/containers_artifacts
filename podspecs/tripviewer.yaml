@@ -23,9 +23,9 @@ spec:
                   name: tv-web-svc
                 env:
                     - name: TRIPS_API_ENDPOINT
-                      value: http://trips-service:80
+                      value: http://trips-service.api-dev.svc.cluster.local:80
                     - name: USERPROFILE_API_ENDPOINT
-                      value: http://userprofile-service:80
+                      value: http://userprofile-service.api-dev.svc.cluster.local:80
                     - name: ASPNETCORE_ENVIRONMENT
                       value: Development
                     - name: HTTP_PROXY
