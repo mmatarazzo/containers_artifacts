@@ -2,6 +2,7 @@
 kind: Deployment
 metadata:
     name: userprofile-deployment
+    namespace: api-dev
     labels:
       app: userprofile
 spec:
@@ -38,16 +39,18 @@ spec:
                 secretKeyRef:
                     name: sql-connection
                     key: SQL_PASSWORD
-
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: userprofile-service
+  namespace: api-dev
 spec:
   selector:
     app: userprofile
   ports:
     - protocol: TCP
       port: 80
-      targetPort: profile-web-svc
+      targetPort: 80
