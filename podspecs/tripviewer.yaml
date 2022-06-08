@@ -1,0 +1,23 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: tripviewer-deployment
+    labels:
+        app: tripviewer
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+          app: tripviewer
+    template:
+        metadata: 
+            labels: 
+                app: tripviewer
+        spec:
+            containers:
+            -   image: registrymsd2910.azurecr.io/tripinsights/tripviewer:1.0
+                name: tripviewer
+                ports:
+                - containerPort: 80
+            imagePullSecrets:
+            - name: regcred
