@@ -20,6 +20,12 @@ spec:
                 ports:
                 - containerPort: 80
                   name: tv-web-svc
+                env:
+                    - name: TRIPS_API_ENDPOINT
+                      value: http://trips-service
+                    - name: USERPROFILE_API_ENDPOINT
+                      value: http://userprofile-service
+
             imagePullSecrets:
             - name: regcred
 
