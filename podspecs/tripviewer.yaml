@@ -2,6 +2,7 @@
 kind: Deployment
 metadata:
     name: tripviewer-deployment
+    namespace: web-dev
     labels:
         app: tripviewer
 spec:
@@ -12,7 +13,7 @@ spec:
     template:
         metadata: 
             labels: 
-                app: tripviewer
+                app: tripviewer 
         spec:
             containers:
             -   image: registrymsd2910.azurecr.io/tripinsights/tripviewer:1.0
@@ -43,6 +44,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tripviewer-service
+  namespace: web-dev
 spec:
   selector:
     app: tripviewer

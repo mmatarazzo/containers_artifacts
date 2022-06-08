@@ -2,6 +2,7 @@
 kind: Deployment
 metadata:
     name: userprofile-deployment
+    namespace: api-dev
     labels:
       app: userprofile
 spec:
@@ -45,6 +46,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: userprofile-service
+  namespace: api-dev
 spec:
   selector:
     app: userprofile

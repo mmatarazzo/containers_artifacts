@@ -2,6 +2,7 @@
 kind: Deployment
 metadata:
     name: trips-deployment
+    namespace: api-dev
     labels:
       app: trips
 spec:
@@ -12,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: trips
+        app: trips 
     spec:
       imagePullSecrets: 
       - name: regcred
@@ -45,6 +46,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: trips-service
+  namespace: api-dev
 spec:
   selector:
     app: trips
