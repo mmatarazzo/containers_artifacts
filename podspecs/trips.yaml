@@ -1,0 +1,26 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: trips-deployment
+    labels:
+      app: trips
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: trips
+  template:
+    metadata:
+      labels:
+        app: trips
+    spec:
+      imagePullSecrets: 
+      - name: regcred
+      containers:
+      - image: registrymsd2910.azurecr.io/tripinsights/trips:1.0
+        name: trips
+        ports:
+        - containerPort: 80
+        env:
+        - name: SQL_SERVER
+          value: sqlservermsd2910.database.windows.net

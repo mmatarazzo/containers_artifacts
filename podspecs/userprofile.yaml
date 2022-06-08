@@ -1,0 +1,26 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: userprofile-deployment
+    labels:
+      app: userprofile
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      imagePullSecrets: 
+      - name: regcred
+      containers:
+      - image: registrymsd2910.azurecr.io/tripinsights/userprofile:1.0
+        name: userprofile
+        ports:
+        - containerPort: 80
+        env:
+        - name: SQL_SERVER
+          value: sqlservermsd2910.database.windows.net
