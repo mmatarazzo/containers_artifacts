@@ -1,0 +1,17 @@
+﻿apiVersion: v1
+kind: Pod
+metadata:
+    name: PoiApi
+spec:
+    containers:
+    - image: registrymsd2910.azurecr.io/tripinsights/po
+        name: poi-api
+        ports:
+        - containerPort: 80
+        env:
+         - name: SQL_SERVER
+           value: sqlservermsd2910.database.windows.net
+         - name: SQL_USER
+           value: <We need to create a user to connect with>
+         - name: SQL_PASSWORD
+           value: <We need to create a user to connect with>
