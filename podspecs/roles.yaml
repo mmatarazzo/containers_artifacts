@@ -1,0 +1,39 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: web-dev
+  name: view-web
+rules:
+- apiGroups: ["","apps"] 
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: web-dev
+  name: edit-web
+rules:
+- apiGroups: ["","apps"] 
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "watch", "list", "create", "update", "patch", "delete", "deletecollection"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: api-dev
+  name: view-api
+rules:
+- apiGroups: ["","apps"]
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: api-dev
+  name: edit-api
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "watch", "list", "create", "update", "patch", "delete", "deletecollection"]

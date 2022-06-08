@@ -1,0 +1,55 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: view-web
+  namespace: web-dev
+subjects:
+- kind: User
+  name: apidev@msftopenhack7075ops.onmicrosoft.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: view-web
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: edit-web
+  namespace: web-dev
+subjects:
+- kind: User
+  name: webdev@msftopenhack7075ops.onmicrosoft.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: edit-web
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: view-api
+  namespace: api-dev
+subjects:
+- kind: User
+  name: webdev@msftopenhack7075ops.onmicrosoft.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: view-api
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: edit-api
+  namespace: api-dev
+subjects:
+- kind: User
+  name: apidev@msftopenhack7075ops.onmicrosoft.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: edit-api
+  apiGroup: rbac.authorization.k8s.io
