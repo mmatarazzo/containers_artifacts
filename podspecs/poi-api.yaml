@@ -19,12 +19,34 @@ spec:
                 name: poi-api
                 ports:
                 - containerPort: 80
+                  name: http-web-svc
                 env:
                  - name: SQL_SERVER
-                   value: sqlservermsd2910.database.windows.net
+                   valueFrom:
+                    secretKeyRef:
+                      name: sql-connection
+                      key: SQL_SERVER
                  - name: SQL_USER
-                   value: sqladminmSd2910
+                   valueFrom:
+                    secretKeyRef:
+                      name: sql-connection
+                      key: SQL_USER
                  - name: SQL_PASSWORD
-                   value: rE2fb1Op2
+                   valueFrom:
+                    secretKeyRef:
+                      name: sql-connection
+                      key: SQL_PASSWORD
             imagePullSecrets:
             - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poi-service
+spec:
+  selector:
+    app: poi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http-web-svc
