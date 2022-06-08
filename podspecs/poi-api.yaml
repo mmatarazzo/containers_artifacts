@@ -1,17 +1,30 @@
-﻿apiVersion: v1
-kind: Pod
+﻿apiVersion: apps/v1
+kind: Deployment
 metadata:
-    name: PoiApi
+    name: poi-deployment
+    labels:
+        app: poi
 spec:
-    containers:
-    - image: registrymsd2910.azurecr.io/tripinsights/po
-        name: poi-api
-        ports:
-        - containerPort: 80
-        env:
-         - name: SQL_SERVER
-           value: sqlservermsd2910.database.windows.net
-         - name: SQL_USER
-           value: <We need to create a user to connect with>
-         - name: SQL_PASSWORD
-           value: <We need to create a user to connect with>
+    replicas: 3
+    selector:
+        matchLabels:
+          app: poi
+    template:
+        metadata: 
+            labels: 
+                app: poi
+        spec:
+            containers:
+            -   image: registrymsd2910.azurecr.io/tripinsights/poi:1.0
+                name: poi-api
+                ports:
+                - containerPort: 80
+                env:
+                 - name: SQL_SERVER
+                   value: sqlservermsd2910.database.windows.net
+                 - name: SQL_USER
+                   value: sqladminmSd2910
+                 - name: SQL_PASSWORD
+                   value: rE2fb1Op2
+            imagePullSecrets:
+            - name: regcred
