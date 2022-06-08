@@ -38,7 +38,8 @@ spec:
                 secretKeyRef:
                     name: sql-connection
                     key: SQL_PASSWORD
-
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
 ---
 apiVersion: v1
 kind: Service
@@ -50,4 +51,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: profile-web-svc
+      targetPort: 80
