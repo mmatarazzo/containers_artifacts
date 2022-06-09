@@ -15,32 +15,43 @@ spec:
       labels:
         app: userprofile
     spec:
-      imagePullSecrets: 
-      - name: regcred
       containers:
       - image: registrymsd2910.azurecr.io/tripinsights/userprofile:1.0
         name: userprofile
         ports:
         - containerPort: 80
           name: profile-web-svc
+        volumeMounts:
+          - name: secrets-store01-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
         env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
             - name: SQL_SERVER
               valueFrom:
-                 secretKeyRef:
-                    name: sql-connection
-                    key: SQL_SERVER
+                secretKeyRef:
+                    name: secrets-store01-inline
+                    key: sqlServer
             - name: SQL_USER
               valueFrom:
                 secretKeyRef:
-                    name: sql-connection
-                    key: SQL_USER
+                    name: secrets-store01-inline
+                    key: sqlUser
             - name: SQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                    name: sql-connection
-                    key: SQL_PASSWORD
-            - name: ASPNETCORE_ENVIRONMENT
-              value: Development
+                    name: secrets-store01-inline
+                    key: sqlPassword
+      imagePullSecrets:
+      - name: regcred
+      volumes:
+      - name: secrets-store01-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "azure-kvname-user-msi"
 ---
 apiVersion: v1
 kind: Service
