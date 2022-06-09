@@ -61,5 +61,4 @@ spec:
     app: poi
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: poi-web-svc
+      port: 80 
